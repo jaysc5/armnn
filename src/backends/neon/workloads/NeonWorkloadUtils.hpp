@@ -9,32 +9,38 @@
 #include <neon/NeonTensorHandle.hpp>
 #include <neon/NeonTimer.hpp>
 #include <armnn/backends/TensorHandle.hpp>
+#include <arm_compute/runtime/Scheduler.h>
 
 #include <armnn/Utils.hpp>
 
 #include <Half.hpp>
+#include <string>
 
 #define ARMNN_SCOPED_PROFILING_EVENT_NEON(name) \
-    ARMNN_SCOPED_PROFILING_EVENT_WITH_INSTRUMENTS(armnn::Compute::CpuAcc, \
-                                                  armnn::EmptyOptional(), \
-                                                  name, \
-                                                  armnn::NeonTimer(), \
-                                                  armnn::WallClockTimer())
+    throw std::exception("ARMNN_SCOPED_PROFILING_EVENT_NEON");
+    // std::cout << "LOG : " << name << "\n";
+    // ARMNN_SCOPED_PROFILING_EVENT_WITH_INSTRUMENTS(armnn::Compute::CpuAcc, \
+    //                                               armnn::EmptyOptional(), \
+    //                                               name, \
+    //                                               armnn::NeonTimer(), \
+    //                                               armnn::WallClockTimer())
 
 #define ARMNN_SCOPED_PROFILING_EVENT_NEON_GUID(name, guid) \
-    ARMNN_SCOPED_PROFILING_EVENT_WITH_INSTRUMENTS(armnn::Compute::CpuAcc, \
-                                                  guid, \
-                                                  GetName() + "_" + name, \
-                                                  armnn::NeonTimer(), \
-                                                  armnn::WallClockTimer())
+    arm_compute::Scheduler::get().set_current_kernel(name, guid);
+    // std::cout << "LOG : Name : " << name << ", guid : " << guid <<  "\n"; \
+    // ARMNN_SCOPED_PROFILING_EVENT_WITH_INSTRUMENTS(armnn::Compute::CpuAcc, \
+    //                                               guid, \
+    //                                               GetName() + "_" + name, \
+    //                                               armnn::NeonTimer(), \
+    //                                               armnn::WallClockTimer())
 
 /// Creates a profiling event that uses GetGuid() and GetName() from the calling class
-#define ARMNN_SCOPED_PROFILING_EVENT_NEON_NAME_GUID(label) \
-    ARMNN_SCOPED_PROFILING_EVENT_WITH_INSTRUMENTS(armnn::Compute::CpuAcc, \
-                                                  this->GetGuid(), \
-                                                  this->GetName() + "_" + label, \
-                                                  armnn::NeonTimer(), \
-                                                  armnn::WallClockTimer())
+// #define ARMNN_SCOPED_PROFILING_EVENT_NEON_NAME_GUID(label) \
+//     ARMNN_SCOPED_PROFILING_EVENT_WITH_INSTRUMENTS(armnn::Compute::CpuAcc, \
+//                                                   this->GetGuid(), \
+//                                                   this->GetName() + "_" + label, \
+//                                                   armnn::NeonTimer(), \
+//                                                   armnn::WallClockTimer())
 
 using namespace armnn::armcomputetensorutils;
 

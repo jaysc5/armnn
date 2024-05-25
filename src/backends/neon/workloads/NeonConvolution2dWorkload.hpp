@@ -12,6 +12,7 @@
 #include <arm_compute/runtime/MemoryManagerOnDemand.h>
 
 #include <memory>
+#include <vector>
 
 namespace armnn
 {
@@ -40,6 +41,11 @@ public:
 
 private:
     std::unique_ptr<arm_compute::IFunction> m_ConvolutionLayer;
+    std::unique_ptr<arm_compute::IFunction> m_SelectedConvolutionConvolutionLayer;
+    
+    std::vector<std::string> m_DirectConvolutionKernelName;
+    std::vector<std::string> m_GeneralConvolutionKernelName;
+    std::vector<std::string> m_WinogradConvolutionKernelName;
 
     mutable std::unique_ptr<arm_compute::Tensor> m_KernelTensor;
     mutable std::unique_ptr<arm_compute::Tensor> m_BiasTensor;

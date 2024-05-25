@@ -85,6 +85,7 @@ NeonFullyConnectedWorkload::NeonFullyConnectedWorkload(const FullyConnectedQueue
     arm_compute::FullyConnectedLayerInfo fc_info =
         ConvertFullyConnectedDescriptorToAclFullyConnectedLayerInfo(descriptor.m_Parameters, activationInfo);
 
+    arm_compute::Scheduler::get().set_gemm_kernelOps("");
     auto layer = std::make_unique<arm_compute::NEFullyConnectedLayer>(memoryManager);
     if (m_WeightsTensorInfo.IsConstant())
     {
