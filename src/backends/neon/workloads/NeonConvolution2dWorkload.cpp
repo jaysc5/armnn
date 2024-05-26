@@ -153,12 +153,12 @@ NeonConvolution2dWorkload::NeonConvolution2dWorkload(
                                                     aclDilationInfo,
                                                     activationInfo,
                                                     isFastMathEnabled));
-        // std::cout << "Create Convolution : " << method << " " << conv_i << std::endl;
+        std::cout << "Create Convolution : " << method << " " << conv_i << std::endl;
         if (method == conv_i) { 
             auto kernels = arm_compute::Scheduler::get().get_convolution_kernel(); 
-            // std::cout << "kernels size : " << kernels.size() << " ()\n";
+            std::cout << "kernels size : " << kernels.size() << " ()\n";
             for (int k_i = 0; k_i < kernels.size(); k_i++) { 
-                // std::cout << "\t" << kernels[k_i] << " ()\n";
+                std::cout << "\t" << kernels[k_i] << " ()\n";
                 switch (conv_i) { 
                 case 1:
                     m_DirectConvolutionKernelName.push_back(kernels[k_i]);

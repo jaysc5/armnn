@@ -51,7 +51,7 @@ COPY --chown=arm-user:arm-user ./scripts/common.sh .
 COPY --chown=arm-user:arm-user ./scripts/setup-armnn.sh .
 
 # Run setup-armnn.sh: download and install Arm NN dependencies
-ARG SETUP_ARGS=""
+ARG SETUP_ARGS="--target-arch=aarch64 --all"
 RUN echo "SETUP_ARGS: $SETUP_ARGS"
 RUN ./setup-armnn.sh $SETUP_ARGS
 
@@ -75,6 +75,6 @@ FROM build-${BUILD_TYPE} as final
 COPY --chown=arm-user:arm-user ./scripts/build-armnn.sh .
 
 # Run build-armnn.sh: build Arm NN and ACL
-ARG BUILD_ARGS=""
+ARG BUILD_ARGS="--target-arch=aarch64 --tflite-classic-delegate --neon-backend --cl-backend"
 RUN echo "BUILD_ARGS: $BUILD_ARGS"
 RUN ./build-armnn.sh $BUILD_ARGS
