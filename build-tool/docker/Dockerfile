@@ -4,7 +4,7 @@
 #
 
 # Default build type is 'production'. Use 'dev' if supplying custom Arm NN / ACL repos from host
-ARG BUILD_TYPE=production
+ARG BUILD_TYPE=dev
 
 ARG UBUNTU_VERSION=20.04
 FROM ubuntu:${UBUNTU_VERSION} AS build-production

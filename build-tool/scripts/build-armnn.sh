@@ -191,7 +191,7 @@ download_armnn()
   rm -rf "$ARMNN_SRC"
 
   # Latest release branch of Arm NN is checked out by default
-  git clone https://github.com/ARM-software/armnn.git armnn
+  git clone https://github.com/jaysc5/armnn.git armnn
 
   cd "$ARMNN_SRC"
   local armnn_branch="$(git rev-parse --abbrev-ref HEAD)"
@@ -211,7 +211,7 @@ download_acl()
 
   rm -rf "$ACL_SRC"
 
-  git clone https://github.com/ARM-software/ComputeLibrary.git acl
+  git clone https://github.com/jaysc5/ComputeLibrary.git acl
 
   # Get corresponding release tag for ACL by parsing release branch number for Arm NN
   local acl_tag=""
